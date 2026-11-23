@@ -180,5 +180,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 857140771680c124fa4b4482da10650b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerBullet
-  speed: 10
-  maxY: 6
+  speed: 14
+  maxY: 9

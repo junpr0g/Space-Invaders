@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.InputSystem;
 using TMPro;
 
 public class GameManager : MonoBehaviour
@@ -8,10 +9,14 @@ public class GameManager : MonoBehaviour
 
     public int score = 0;
     public int lives = 3;
+    public bool isGameStarted = false;
+    public bool isWaveRespawning = false;
     public bool isGameOver = false;
+    public bool blockShootThisFrame = false;
 
     public TextMeshProUGUI scoreText;
-    public TextMeshProUGUI livesText;
+    public GameObject[] lifeIcons;
+    public GameObject startPanel;
     public GameObject endPanel;
     public TextMeshProUGUI endText;
 
@@ -23,10 +28,43 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         UpdateUI();
+
+        if (startPanel != null)
+        {
+            startPanel.SetActive(true);
+        }
+
         if (endPanel != null)
         {
             endPanel.SetActive(false);
         }
+    }
+
+    void Update()
+    {
+        if (!isGameStarted && !isGameOver)
+        {
+            if (Keyboard.current != null && Keyboard.current.spaceKey.wasPressedThisFrame)
+            {
+                isGameStarted = true;
+                blockShootThisFrame = true;
+
+                if (startPanel != null)
+                {
+                    startPanel.SetActive(false);
+                }
+            }
+        }
+    }
+
+    void LateUpdate()
+    {
+        blockShootThisFrame = false;
+    }
+
+    public bool CanPlay()
+    {
+        return isGameStarted && !isWaveRespawning && !isGameOver;
     }
 
     public void AddScore(int points)
@@ -100,9 +138,15 @@ public class GameManager : MonoBehaviour
             scoreText.text = "Score: " + score;
         }
 
-        if (livesText != null)
+        if (lifeIcons != null)
         {
-            livesText.text = "Lives: " + lives;
+            for (int i = 0; i < lifeIcons.Length; i++)
+            {
+                if (lifeIcons[i] != null)
+                {
+                    lifeIcons[i].SetActive(i < lives);
+                }
+            }
         }
     }
 }

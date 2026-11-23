@@ -2,12 +2,14 @@ using UnityEngine;
 
 public class EnemyBullet : MonoBehaviour
 {
-    public float speed = 6f;
-    public float minY = -6f;
+    public float speed = 8.5f;
+    public float minY = -9f;
+
+    private bool hit = false;
 
     void Update()
     {
-        if (GameManager.instance != null && GameManager.instance.isGameOver)
+        if (GameManager.instance != null && (GameManager.instance.isGameOver || GameManager.instance.isWaveRespawning))
         {
             Destroy(gameObject);
             return;
@@ -23,8 +25,23 @@ public class EnemyBullet : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
+        if (hit)
+        {
+            return;
+        }
+
+        BunkerBlock block = other.GetComponent<BunkerBlock>();
+        if (block != null)
+        {
+            hit = true;
+            BunkerBlock.SplashHit(block.transform.position);
+            Destroy(gameObject);
+            return;
+        }
+
         if (other.GetComponent<PlayerController>() != null)
         {
+            hit = true;
             if (GameManager.instance != null)
             {
                 GameManager.instance.LoseLife();

@@ -3,17 +3,17 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
-    public float speed = 6f;
-    public float xLimit = 7.5f;
+    public float speed = 11f;
+    public float xLimit = 12.2f;
     public GameObject bulletPrefab;
     public Transform firePoint;
-    public float fireDelay = 0.4f;
+    public float fireDelay = 0.35f;
 
     private float fireTimer = 0f;
 
     void Update()
     {
-        if (GameManager.instance != null && GameManager.instance.isGameOver)
+        if (GameManager.instance != null && !GameManager.instance.CanPlay())
         {
             return;
         }
@@ -48,6 +48,11 @@ public class PlayerController : MonoBehaviour
         transform.position = pos;
 
         fireTimer += Time.deltaTime;
+        if (GameManager.instance != null && GameManager.instance.blockShootThisFrame)
+        {
+            return;
+        }
+
         if (Keyboard.current.spaceKey.wasPressedThisFrame && fireTimer >= fireDelay)
         {
             Instantiate(bulletPrefab, firePoint.position, Quaternion.identity);
