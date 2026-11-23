@@ -33,20 +33,21 @@ public class BunkerBlock : MonoBehaviour
         }
     }
 
-    public static void SplashHit(Vector3 center)
+    public static void SplashHit(Vector3 center, float scale = 1f)
     {
-        Collider2D[] hits = Physics2D.OverlapCircleAll(center, 0.35f);
+        float clampedScale = Mathf.Max(scale, 0.01f);
+        Collider2D[] hits = Physics2D.OverlapCircleAll(center, 0.35f * clampedScale);
         for (int i = 0; i < hits.Length; i++)
         {
             BunkerBlock block = hits[i].GetComponent<BunkerBlock>();
             if (block != null)
             {
                 float dist = Vector2.Distance(center, block.transform.position);
-                if (dist < 0.1f)
+                if (dist < 0.1f * clampedScale)
                 {
                     block.TakeDamage(3);
                 }
-                else if (dist < 0.24f)
+                else if (dist < 0.24f * clampedScale)
                 {
                     block.TakeDamage(2);
                 }

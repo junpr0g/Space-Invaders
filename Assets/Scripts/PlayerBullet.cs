@@ -34,7 +34,7 @@ public class PlayerBullet : MonoBehaviour
         if (block != null)
         {
             hit = true;
-            BunkerBlock.SplashHit(block.transform.position);
+            BunkerBlock.SplashHit(block.transform.position, block.transform.lossyScale.x);
             Destroy(gameObject);
             return;
         }

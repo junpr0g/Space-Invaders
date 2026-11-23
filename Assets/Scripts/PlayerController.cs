@@ -3,11 +3,11 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
-    public float speed = 11f;
+    public float speed = 7f;
     public float xLimit = 12.2f;
     public GameObject bulletPrefab;
     public Transform firePoint;
-    public float fireDelay = 0.35f;
+    public float fireDelay = 0.75f;
 
     private float fireTimer = 0f;
 

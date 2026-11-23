@@ -11,8 +11,8 @@ public class EnemyFormation : MonoBehaviour
     public float startY = 6.2f;
     public float baseSpeed = 1.2f;
     public float speedPerKilledEnemy = 0.03f;
-    public float maxSpeedMultiplier = 1.7f;
-    public float lastEnemyMultiplier = 3.14f;
+    public float maxSpeedMultiplier = 2.71f; // An Easter egg related to Euler's number
+    public float lastEnemyMultiplier = 4.66f; // An Easter egg related to Feigenbaum number, i think thats cool.
     public float stepDown = 0.4f;
     public float edgeLimit = 12.2f;
     public float bottomLimit = -3.85f;
