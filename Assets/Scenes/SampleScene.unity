@@ -524,15 +524,15 @@ MonoBehaviour:
   - {fileID: 1806030559538006396, guid: 02a74628ab2a85f45b761e221f5f6f99, type: 3}
   - {fileID: 8699204971156254390, guid: b6e6baccea307944db1aeaf1707774bb, type: 3}
   - {fileID: 2649459835858713138, guid: e435022a941ff1747a0d703670a9fa59, type: 3}
-  rows: 6
+  rows: 5
   columns: 9
   spacingX: 1.4
   spacingY: 1
-  startY: 7.2
+  startY: 6.2
   baseSpeed: 1
-  speedPerKilledEnemy: 0.07926
+  speedPerKilledEnemy: 0.0973
   maxSpeedMultiplier: 3.14
-  lastEnemyMultiplier: 4.66
+  lastEnemyMultiplier: 6.28
   stepDown: 0.4
   edgeLimit: 9
   bottomLimit: -3.85
