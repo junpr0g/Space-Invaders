@@ -10,7 +10,7 @@ public class EnemyFormation : MonoBehaviour
     public float spacingY = 1.0f;
     public float startY = 7.2f;
     public float baseSpeed = 1f;
-    public float speedPerKilledEnemy = 0.07926f; // When exactly half of them have been killed, the speed threshold is reached.
+    public float speedPerKilledEnemy = 0.0973f; // When half of them have been killed, the speed threshold is reached.
 
     public float maxSpeedMultiplier = 3.14f; // An Easter egg related to Euler's number.
     public float lastEnemyMultiplier = 6.28f; // An Easter egg related to the Tau number, i think thats cool.
