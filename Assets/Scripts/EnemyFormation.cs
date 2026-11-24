@@ -4,17 +4,18 @@ using UnityEngine;
 public class EnemyFormation : MonoBehaviour
 {
     public GameObject[] enemyPrefabs;
-    public int rows = 5;
+    public int rows = 6;
     public int columns = 9;
     public float spacingX = 1.4f;
     public float spacingY = 1.0f;
-    public float startY = 6.2f;
-    public float baseSpeed = 1.2f;
-    public float speedPerKilledEnemy = 0.03f;
-    public float maxSpeedMultiplier = 2.71f; // An Easter egg related to Euler's number
-    public float lastEnemyMultiplier = 4.66f; // An Easter egg related to Feigenbaum number, i think thats cool.
+    public float startY = 7.2f;
+    public float baseSpeed = 1f;
+    public float speedPerKilledEnemy = 0.07926f; // When exactly half of them have been killed, the speed threshold is reached.
+
+    public float maxSpeedMultiplier = 3.14f; // An Easter egg related to Euler's number.
+    public float lastEnemyMultiplier = 6.28f; // An Easter egg related to the Tau number, i think thats cool.
     public float stepDown = 0.4f;
-    public float edgeLimit = 12.2f;
+    public float edgeLimit = 10.5f;
     public float bottomLimit = -3.85f;
     public GameObject enemyBulletPrefab;
     public float shootInterval = 0.8f;

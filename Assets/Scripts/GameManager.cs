@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.InputSystem;
@@ -11,8 +12,10 @@ public class GameManager : MonoBehaviour
     public int lives = 3;
     public bool isGameStarted = false;
     public bool isWaveRespawning = false;
+    public bool isPlayerRespawning = false;
     public bool isGameOver = false;
     public bool blockShootThisFrame = false;
+    public float postRespawnDelay = 1f;
 
     public TextMeshProUGUI scoreText;
     public GameObject[] lifeIcons;
@@ -64,7 +67,7 @@ public class GameManager : MonoBehaviour
 
     public bool CanPlay()
     {
-        return isGameStarted && !isWaveRespawning && !isGameOver;
+        return isGameStarted && !isWaveRespawning && !isPlayerRespawning && !isGameOver;
     }
 
     public void AddScore(int points)
@@ -80,7 +83,7 @@ public class GameManager : MonoBehaviour
 
     public void LoseLife()
     {
-        if (isGameOver)
+        if (isGameOver || isPlayerRespawning)
         {
             return;
         }
@@ -88,10 +91,33 @@ public class GameManager : MonoBehaviour
         lives--;
         UpdateUI();
 
-        if (lives <= 0)
+        PlayerController player = FindAnyObjectByType<PlayerController>();
+        if (player != null)
+        {
+            StartCoroutine(HandlePlayerDeathRoutine(player));
+        }
+        else if (lives <= 0)
         {
             GameOver(false);
         }
+    }
+
+    IEnumerator HandlePlayerDeathRoutine(PlayerController player)
+    {
+        isPlayerRespawning = true;
+
+        yield return StartCoroutine(player.PlayDestructionAnimation());
+
+        if (lives <= 0)
+        {
+            isPlayerRespawning = false;
+            GameOver(false);
+            yield break;
+        }
+
+        yield return StartCoroutine(player.PlayRespawnBlinkAnimation(postRespawnDelay));
+
+        isPlayerRespawning = false;
     }
 
     public void GameOver(bool win)

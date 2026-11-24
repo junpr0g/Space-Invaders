@@ -524,17 +524,17 @@ MonoBehaviour:
   - {fileID: 1806030559538006396, guid: 02a74628ab2a85f45b761e221f5f6f99, type: 3}
   - {fileID: 8699204971156254390, guid: b6e6baccea307944db1aeaf1707774bb, type: 3}
   - {fileID: 2649459835858713138, guid: e435022a941ff1747a0d703670a9fa59, type: 3}
-  rows: 5
+  rows: 6
   columns: 9
   spacingX: 1.4
   spacingY: 1
-  startY: 6.2
-  baseSpeed: 1.2
-  speedPerKilledEnemy: 0.03
-  maxSpeedMultiplier: 2.71
+  startY: 7.2
+  baseSpeed: 1
+  speedPerKilledEnemy: 0.07926
+  maxSpeedMultiplier: 3.14
   lastEnemyMultiplier: 4.66
   stepDown: 0.4
-  edgeLimit: 12.2
+  edgeLimit: 9
   bottomLimit: -3.85
   enemyBulletPrefab: {fileID: 7900878515118088615, guid: ca5f599a7577de44e9c33b85feab9525, type: 3}
   shootInterval: 0.8
@@ -4963,7 +4963,7 @@ Transform:
   m_GameObject: {fileID: 350930621}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.6, y: -4.9, z: 0}
+  m_LocalPosition: {x: 2.2, y: -4.9, z: 0}
   m_LocalScale: {x: 0.7, y: 0.7, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -12611,7 +12611,7 @@ Transform:
   m_GameObject: {fileID: 721346214}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 7.8, y: -4.9, z: 0}
+  m_LocalPosition: {x: 6.6, y: -4.9, z: 0}
   m_LocalScale: {x: 0.7, y: 0.7, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -14493,6 +14493,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: BunkerBlock
       objectReference: {fileID: 0}
+    - target: {fileID: 4654926939337820044, guid: d776a032c252a9c4fabe4811d630e63c, type: 3}
+      propertyPath: hp
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 7868942342245369306, guid: d776a032c252a9c4fabe4811d630e63c, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.88
@@ -15498,7 +15502,7 @@ Transform:
   m_GameObject: {fileID: 850664653}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.6, y: -4.9, z: 0}
+  m_LocalPosition: {x: -2.2, y: -4.9, z: 0}
   m_LocalScale: {x: 0.7, y: 0.7, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -19853,11 +19857,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e51bf88af61a36c49a71fd6211440af4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
-  speed: 11
-  xLimit: 12.2
+  speed: 7
+  xLimit: 9
   bulletPrefab: {fileID: 1716642378714094038, guid: 5b39fe67152b9df4a909dd810a6ce182, type: 3}
   firePoint: {fileID: 1365803301}
-  fireDelay: 0.35
+  fireDelay: 0.5
+  destructionDuration: 0.7
+  respawnBlinkInterval: 0.1
 --- !u!50 &1126739962
 Rigidbody2D:
   serializedVersion: 5
@@ -26860,7 +26866,7 @@ Transform:
   m_GameObject: {fileID: 1575137449}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -7.8, y: -4.9, z: 0}
+  m_LocalPosition: {x: -6.6, y: -4.9, z: 0}
   m_LocalScale: {x: 0.7, y: 0.7, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -31734,8 +31740,10 @@ MonoBehaviour:
   lives: 3
   isGameStarted: 0
   isWaveRespawning: 0
+  isPlayerRespawning: 0
   isGameOver: 0
   blockShootThisFrame: 0
+  postRespawnDelay: 1
   scoreText: {fileID: 862947988}
   lifeIcons:
   - {fileID: 1189148668}

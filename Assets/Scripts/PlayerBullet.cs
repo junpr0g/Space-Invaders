@@ -9,7 +9,7 @@ public class PlayerBullet : MonoBehaviour
 
     void Update()
     {
-        if (GameManager.instance != null && (GameManager.instance.isGameOver || GameManager.instance.isWaveRespawning))
+        if (GameManager.instance != null && (GameManager.instance.isGameOver || GameManager.instance.isWaveRespawning || GameManager.instance.isPlayerRespawning))
         {
             Destroy(gameObject);
             return;

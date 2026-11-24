@@ -2,7 +2,9 @@ using UnityEngine;
 
 public class BunkerBlock : MonoBehaviour
 {
-    public int hp = 3;
+    public int hp = 1;
+    private const float BlockSize = 0.16f;
+    private const float MaxSplashBlocks = 3f;
     private SpriteRenderer sr;
 
     void Start()
@@ -36,25 +38,30 @@ public class BunkerBlock : MonoBehaviour
     public static void SplashHit(Vector3 center, float scale = 1f)
     {
         float clampedScale = Mathf.Max(scale, 0.01f);
-        Collider2D[] hits = Physics2D.OverlapCircleAll(center, 0.35f * clampedScale);
+        float blockStep = BlockSize * clampedScale;
+        float maxRadius = (MaxSplashBlocks + 0.1f) * blockStep;
+
+        Collider2D[] hits = Physics2D.OverlapCircleAll(center, maxRadius);
         for (int i = 0; i < hits.Length; i++)
         {
             BunkerBlock block = hits[i].GetComponent<BunkerBlock>();
-            if (block != null)
+            if (block == null)
             {
-                float dist = Vector2.Distance(center, block.transform.position);
-                if (dist < 0.1f * clampedScale)
-                {
-                    block.TakeDamage(3);
-                }
-                else if (dist < 0.24f * clampedScale)
-                {
-                    block.TakeDamage(2);
-                }
-                else
-                {
-                    block.TakeDamage(1);
-                }
+                continue;
+            }
+
+            float dist = Vector2.Distance(center, block.transform.position);
+            if (dist <= 0.5f * blockStep)
+            {
+                block.TakeDamage(1);
+                continue;
+            }
+
+            float normalizedDist = Mathf.Clamp01(dist / maxRadius);
+            float destroyChance = Mathf.Lerp(0.85f, 0.12f, normalizedDist);
+            if (Random.value <= destroyChance)
+            {
+                block.TakeDamage(1);
             }
         }
     }

@@ -152,4 +152,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 450e3621059934e4cbb029b44d5bfcb4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BunkerBlock
-  hp: 3
+  hp: 1
